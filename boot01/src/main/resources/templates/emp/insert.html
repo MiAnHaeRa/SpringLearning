@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="https://www.thymeleaf.org/">
+
+<head>
+	<meta charset="UTF-8">
+	<title>등록화면</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+		crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+
+<body>
+	<div class="container">
+		<form th:action="@{/empInsert}" method="post" name="insertForm">
+			<h3>사원 정보 등록</h3>
+			<div>
+				<label for="ename">이름</label>
+				<input class="form-control" type="text" id="ename" name="lastName">
+			</div>
+			<div>
+				<label for="email">이메일</label>
+				<input class="form-control" type="email" id="email" name="email">
+			</div>
+			<div>
+				<label for="hDate">입사일</label>
+				<input class="form-control" type="date" id="hDate" name="hireDate">
+			</div>
+			<div>
+				<label for="job">업무</label>
+				<input class="form-control" type="text" id="job" name="jobId">
+			</div>
+			<div>
+				<label for="sal">급여</label>
+				<input class="form-control" type="number" id="sal" name="salary">
+			</div>
+			<div>
+				<button type="submit" class="btn btn-primary">등록</button>
+			</div>
+		</form>
+	</div>
+	<script>
+		$("form").on('submit', submitHandler)
+
+		function submitHandler(event) {
+			event.preventDefault();
+
+			let name = $("input[name = lastName]")
+			if (name.val() == "") {
+				alert("이름을 입력해 주세요");
+				return name.focus();
+			}
+
+			let email = $("input[name = email]")
+			if (email.val() == "") {
+				alert("이메일을 입력해 주세요");
+				return email.focus();
+			}
+
+			let hDate = $("input[name = hireDate]")
+			if (hDate.val() == "") {
+				alert("입사일을 입력해 주세요");
+				return hDate.focus();
+			}
+
+			let job = $("input[name = jobId]")
+			if (job.val() == "") {
+				alert("업무를 입력해 주세요");
+				return job.focus();
+			}
+
+			let sal = $("input[name = salary]")
+			if (sal.val() <= 0) {
+				alert("급여는 0보다 큰 수를 입력해 주세요");
+				return sal.focus();
+			}
+
+			insertForm.submit();
+		}
+	</script>
+</body>
+
+</html>
