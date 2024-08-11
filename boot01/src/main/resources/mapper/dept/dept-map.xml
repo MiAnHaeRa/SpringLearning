@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yedam.app.dept.mapper.DeptMapper">
+
+	<!-- 전체조회 -->
+	<select id="deptList" parameterType="DeptVO">
+		select	department_id
+				, department_name
+				, manager_id
+				, location_id
+		from	departments
+	</select>
+	<!-- 단건조회 -->
+	<select id="deptInfo" parameterType="DeptVO">
+		select department_id
+				, department_name
+				, manager_id
+				, location_id
+		from	departments
+		where	department_id = #{departmentId}
+	</select>
+	
+	<!-- 부서정보 등록 -->
+	<insert id="deptInsert">
+	<selectKey order="BEFORE" keyProperty="departmentId" resultType="Integer">
+		select	nvl(max(department_id), 0) + 10
+		from	departments
+	</selectKey>
+		insert into departments	( department_id
+								, department_name
+								, manager_id
+								, location_id)
+		values(	#{departmentId}
+			  , #{departmentName}
+			  , #{managerId}
+			  , #{locationId})
+	</insert>
+	
+	<!-- 부서정보 수정 -->
+	<update id="deptUpdate">
+		update	departments
+		set		department_name = #{dept.departmentName}
+				<if test="dept.managerId > 0">
+				, manager_id = #{dept.managerId}
+				</if>
+				<if test="dept.locationId > 0">
+				, location_id = #{dept.locationId}
+				</if>
+		where	department_id = #{id}
+	</update>
+	
+	<!-- 부서정보 삭제 -->
+	<delete id="deptDelete">
+		delete from departments
+		where department_id = #{deptId}
+	</delete>
+	
+</mapper>

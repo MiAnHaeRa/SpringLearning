@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Build-Jdk-Spec: 21
+Build-Jdk-Spec: 17
 Class-Path: spring-context-5.3.37.jar spring-aop-5.3.37.jar spring-beans
  -5.3.37.jar spring-core-5.3.37.jar spring-jcl-5.3.37.jar spring-express
  ion-5.3.37.jar
