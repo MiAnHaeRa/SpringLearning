@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="https://www.thymeleaf.org/">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Form 방식</title>
+	<!-- formUpload.html -->
+</head>
+
+<body>
+	<form th:action="@{/uploadForm}" method="post" enctype="multipart/form-data">
+		<input type="file" name="files" multiple>
+		<button type="submit">저장</button>
+	</form>
+</body>
+
+</html>

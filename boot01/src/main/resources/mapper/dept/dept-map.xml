@@ -9,6 +9,7 @@
 				, manager_id
 				, location_id
 		from	departments
+		order by department_id
 	</select>
 	<!-- 단건조회 -->
 	<select id="deptInfo" parameterType="DeptVO">
