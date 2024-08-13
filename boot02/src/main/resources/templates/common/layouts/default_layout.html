@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<!-- layouts/default_layout.html -->
+<html lang="ko" xmlns:th="https://www.thymeleaf.org/" xmlns:layout="https://github.com/ultraq/thymeleaf-layout-dialect/">
+
+<head>
+	<meta charset="UTF-8">
+	<!--/* head에서는 replace를 주로 씀 => 덮어씀 */-->
+	<th:block th:replace="~{common/configs/default_configs :: ConfigFrag}"></th:block>
+</head>
+
+<body>
+	<!--/* body쪽에는 insert를 주로 씀 => 삽입함 */-->
+	<header th:insert="~{common/fragments/default_header :: HeaderFrag}">
+
+	</header>
+	<!-- end of header -->
+
+	<main>
+		<div layout:fragment="Content"></div>
+	</main>
+	<!-- end of main -->
+
+	<footer>
+
+	</footer>
+	<!-- end of footer -->
+
+</body>
+
+</html>
