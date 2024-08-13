@@ -18,7 +18,10 @@ public class LoginUserVO implements UserDetails{
 	private UserVO userVO;
 	
 	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {	//<? extends~~> 상속 받은것중 하나 제한
+	public Collection<? extends GrantedAuthority> getAuthorities() {	
+					// ? extend ~~ 상속관계로 이루어진 클래스만 자료형으로 받는다
+					// ? super ~~ 상속관계에 존재하는 클래스만 자료형으로 받는다
+					// 참고 사이트 : https://nostress.tistory.com/2
 		List<GrantedAuthority> auths = new ArrayList<>();
 		auths.add(new SimpleGrantedAuthority(userVO.getRoleName()));	
 		

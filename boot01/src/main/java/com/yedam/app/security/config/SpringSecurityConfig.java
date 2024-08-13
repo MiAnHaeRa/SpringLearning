@@ -4,11 +4,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 import jakarta.servlet.DispatcherType;
@@ -34,7 +31,7 @@ public class SpringSecurityConfig {
 						.requestMatchers("/", "/all").permitAll()		//해당 경로는 시큐리티 없이 진행
 						.requestMatchers("/user/**").hasRole("USER")	//hasAnyRole => 여러 권한 승인
 						.requestMatchers("/admin/**").hasAnyAuthority("ROLE_ADMIN")	
-						.anyRequest().permitAll())		//나머지 모든 경로 시큐리티 없이 진행
+						.anyRequest().authenticated())		//나머지 모든 경로 인증만 되었으면 접근 가능
 			.formLogin(formLogin 
 					-> formLogin
 						.defaultSuccessUrl("/all"))
@@ -43,6 +40,8 @@ public class SpringSecurityConfig {
 						.logoutSuccessUrl("/all")
 						.invalidateHttpSession(true));	//관련 정보 Session에서 삭제
 			
+		//csrf 비활성화
+		http.csrf(csrf -> csrf.disable());
 		
 		return http.build();
 	}
