@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="https://www.thymeleaf.org/" xmlns:layout="https://github.com/ultraq/thymeleaf-layout-dialect/"
+	layout:decorate="~{common/layouts/default_layout}" layout:fragment="Content">
+
+<head>
+	<title>Insert title here</title>
+</head>
+
+<body>
+	<div class="container text-center">
+		<h2>게시글 정보</h2>
+		<table class="table">
+			<tr>
+				<th>번호</th>
+				<td>[[ ${board.bno} ]]</td>
+				<th>제목</th>
+				<td>[[ ${board.title} ]]</td>
+			</tr>
+			<tr>
+				<th>작성자</th>
+				<td>[[ ${board.writer} ]]</td>
+				<th>작성일</th>
+				<td>[[ ${#dates.format(board.regdate, 'yyyy/MM/dd')} ]]</td>
+			</tr>
+			<tr height="200">
+				<th>내용</th>
+				<td colspan="3">[[ ${board.contents} ]]</td>
+			</tr>
+			<tr>
+				<th>첨부파일</th>
+				<td colspan="3">
+					<img style="width: 150px;" th:src="@{/images/{fileName}(fileName=${board.image})}">
+				</td>
+			</tr>
+		</table>
+		<button class="btn btn-warning" type="button"
+			th:onclick="|location.href='@{/boardUpdate(bno=${board.bno})}'|">수정</button>
+		<button class="btn btn-success" type="button" th:onclick="|location.href='@{/boardList}'|">목록</button>
+		<button class="btn btn-danger" type="button"
+			th:onclick="|location.href='@{/boardDelete(no=${board.bno})}'|">삭제</button>
+	</div>
+</body>
+
+</html>

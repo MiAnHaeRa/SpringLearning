@@ -29,7 +29,7 @@
 	
 	<!-- 단건등록 -->
 	<insert id="insertBoardInfo" parameterType="BoardVO">
-		<selectKey order="BEFORE" keyProperty="BoardVO">
+		<selectKey order="BEFORE" keyProperty="bno" resultType="Integer">
 			select	nvl(max(bno), 100) + 1
 			from	board
 		</selectKey>

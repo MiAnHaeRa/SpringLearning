@@ -77,8 +77,8 @@ public class BoardController {
 	// 삭제 - 처리 : URI - boardDelete / PARAMETER - Integer => QueryString
 	//             RETURN - 전체조회 다시 호출
 	@GetMapping("boardDelete")
-	public String boardDelete(Integer bno) {
-		boardService.deleteBoard(bno);
+	public String boardDelete(Integer no) {
+		boardService.deleteBoard(no);
 		
 		return "redirect:boardList";
 	}

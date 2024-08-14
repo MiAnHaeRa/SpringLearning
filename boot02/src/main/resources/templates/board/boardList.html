@@ -1,10 +1,48 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="https://www.thymeleaf.org/">
+<html lang="ko" xmlns:th="https://www.thymeleaf.org/" xmlns:layout="https://github.com/ultraq/thymeleaf-layout-dialect/"
+	layout:decorate="~{common/layouts/default_layout}" layout:fragment="Content">
+
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 </head>
+
 <body>
 
+	<div class="container text-center">
+		<h3>게시판 목록</h3>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>작성일</th> <!-- yyyy년MM월dd일 -->
+				</tr>
+			</thead>
+			<tbody>
+				<th:block th:each=" board : ${boardList} ">
+					<tr>
+						<td>[[ ${board.bno} ]]</td>
+						<td>[[ ${board.title} ]]</td>
+						<td>[[ ${board.writer} ]]</td>
+						<td>[[ ${#dates.format(board.regdate, 'yyyy년MM월dd일')} ]]</td>
+					</tr>
+				</th:block>
+			</tbody>
+		</table>
+	</div>
+
+	<script>
+		const contextPath = $("meta[name='contextPath']").attr("value");
+		$("tbody > tr").on("click", boardSelectHandler);
+
+		function boardSelectHandler(e) {
+			let bno = $(e.currentTarget).children().first().text();
+			let url = contextPath + "/boardInfo?bno=" + bno;
+			location.href = url;
+		}
+	</script>
 </body>
+
 </html>

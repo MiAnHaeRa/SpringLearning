@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <!-- layouts/default_layout.html -->
-<html lang="ko" xmlns:th="https://www.thymeleaf.org/" xmlns:layout="https://github.com/ultraq/thymeleaf-layout-dialect/">
+<html lang="ko" xmlns:th="https://www.thymeleaf.org/"
+	xmlns:layout="https://github.com/ultraq/thymeleaf-layout-dialect/">
 
 <head>
 	<meta charset="UTF-8">
 	<!--/* head에서는 replace를 주로 씀 => 덮어씀 */-->
 	<th:block th:replace="~{common/configs/default_configs :: ConfigFrag}"></th:block>
+	<meta name="contextPath" th:value="${contextPath}">
 </head>
 
 <body>
